@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Info</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #f4f7f9;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 60%;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+        }
+        .weather-result {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .error {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<form method="get">
+    <input type="text" name="city" placeholder="Enter city name" value="{{ city }}">
+    <button type="submit">Get Weather</button>
+</form>
+
+{% if error %}
+    <p class="error">{{ error }}</p>
+{% endif %}
+
+{% if weather %}
+    <div class="weather-result">
+        <h2>Weather in {{ weather.name }}</h2>
+        <p><strong>Temperature:</strong> {{ weather.main.temp }} °C</p>
+        <p><strong>Condition:</strong> {{ weather.weather.0.description|capfirst }}</p>
+    </div>
+{% endif %}
+
+</body>
+</html>
